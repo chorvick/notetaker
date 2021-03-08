@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/chorvick/notetaker/issues"
   },
-  "homepage": "https://github.com/chorvick/notetaker#readme"
+  "homepage": "https://github.com/chorvick/notetaker#readme",
+  "dependencies": {
+    "package.json": "^2.0.1"
+  }
 }
