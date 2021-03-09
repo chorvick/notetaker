@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/chorvick/notetaker#readme",
   "dependencies": {
-    "package.json": "^2.0.1"
+    "express": "^4.17.1",
+    "package.json": "^2.0.1",
+    "stack": "^0.1.0"
   }
 }
