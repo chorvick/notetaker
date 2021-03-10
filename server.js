@@ -1,10 +1,8 @@
 // DEPENDENCIES
 // Series of npm packages that we will use to give our server useful functionality
-const fs = require('fs');
 const express = require('express');
 const path = require('path');
-
-
+const morgan = require("morgan")
 // Tells node that we are creating an "express" server
 const app = express();
 
@@ -12,24 +10,16 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 
 // Sets up the Express app to handle data parsing
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-//sanity check to make sure server works
-// app.get("/", (req, res) => {
-//     res.send(`<h1> this thing works</>`);
-// });
-
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(morgan("dev"))
 app.use(express.static("public"));
-
 
 // ROUTER
 // The below points our server to a series of "route" files.
 // These routes give our server a "map" of how to respond when users visit or request data from various URLs.
-
-require("./public/assets/routes/apiRoutes.")(app);
-require("./public/assets/routes/htmlroutes")(app);
-// LISTENER
-// The below code effectively "starts" our server
+require("./routes/apiRoutes")(app);
+require("./routes/htmlRoutes")(app);
 
 app.listen(PORT, () => {
     console.log(`App listening on PORT: ${PORT}`);
