@@ -3,12 +3,14 @@ const path = require("path");
 const db = __dirname + "/../db/db.json"
 const db2 = require("../db/db.json");
 const { v4: uuidv4 } = require('uuid');
+
 // uuidv4();
 ///You'll need to find a way to give each note a unique id when it's saved (look into `npm` packages that could do this for you).
 /////  package uuid ---NEED TO INSTALL AND LEARN HOW TO WORK ONCE BASIC WEB PAGE FUNCTIONS
 
 
 module.exports = (app) => {
+    let notes = JSON.parse(fs.readFileSync(db, "utf8"))
     // A get request that shows all of the notes data.
     app.get("/api/notes", (req, res) => {
         // Read the db.json file
@@ -32,31 +34,27 @@ module.exports = (app) => {
         });
 
 
-
-
-
-
-        // A Delete route to remoce the note given the UUID
-
-        app.delete("/api/notes/:id", (req, res) => {
-            let idDel = req.params.id;
-            let theNote = JSON.parse(fs.readFileSync("../db/db.json", "utf8"));
-            theNote = theNote.filter(noteSelected => {
-                return noteSelected.id != idDel
-            })
-            // console.log(id);
-            // console.log("api/notes/:id");
-            fsWriteFile(db2, JSON.stringify(theNote));
-            res.json(notes);
-        })
-
-
-
     });
+
+
+
+    // A Delete route to remoce the note given the UUID
+
+    app.delete("/api/notes/:id", (req, res) => {
+        let idDel = req.params.id;
+
+        notes = notes.filter(noteSelected => {
+            return noteSelected.id != idDel
+        });
+        // console.log(id);
+        // console.log("api/notes/:id");
+        fs.WriteFile("../db/db.json", JSON.stringify(notes)); (err) => {
+            if (err) throw err;
+            res.json(notes);
+        }
+    });
+
+
+
+
 };
-
-
-
-
-
-
