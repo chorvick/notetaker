@@ -34,12 +34,29 @@ module.exports = (app) => {
 
 
 
+
+
+        // A Delete route to remoce the note given the UUID
+
+        app.delete("/api/notes/:id", (req, res) => {
+            let idDel = req.params.id;
+            let theNote = JSON.parse(fs.readFileSync("../db/db.json", "utf8"));
+            theNote = theNote.filter(noteSelected => {
+                return noteSelected.id != idDel
+            })
+            // console.log(id);
+            // console.log("api/notes/:id");
+            fsWriteFile(db2, JSON.stringify(theNote));
+            res.json(notes);
+        })
+
+
+
     });
-
-
-
-
-
-    // A Delete route to remoce the note given the UUID
 };
+
+
+
+
+
 
