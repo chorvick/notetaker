@@ -48,10 +48,10 @@ module.exports = (app) => {
         });
         // console.log(id);
         // console.log("api/notes/:id");
-        fs.WriteFile("../db/db.json", JSON.stringify(notes)); (err) => {
+        fs.writeFile(path.join(__dirname, "../db/db.json"), JSON.stringify(notes), (err) => {
             if (err) throw err;
             res.json(notes);
-        }
+        });
     });
 
 
