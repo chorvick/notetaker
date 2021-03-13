@@ -1,3 +1,6 @@
+// set up everything we need first before the module.exports function
+
+
 const fs = require("fs");
 const path = require("path");
 const db = __dirname + "/../db/db.json"
